@@ -63,7 +63,7 @@ class BaseAndroidSdk {
     }
     acceptLicense() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield exec_with_result_1.default(`${this.androidHome()}/tools/bin/sdkmanager --licenses <<< 'y\ny\ny\ny\ny\ny\ny\ny\ny\n'`);
+            yield exec_with_result_1.default(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager --licenses <<< 'y\ny\ny\ny\ny\ny\ny\ny\ny\n'"`);
         });
     }
     installEmulatorPackage(api, tag, abi, verbose) {
