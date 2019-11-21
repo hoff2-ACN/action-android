@@ -61,6 +61,9 @@ class BaseAndroidSdk {
     androidHome() {
         return `${process.env.HOME}/android-sdk`;
     }
+    emulatorCmd() {
+        return `${this.androidHome()}/emulator/emulator`;
+    }
     acceptLicense() {
         return __awaiter(this, void 0, void 0, function* () {
             yield exec_with_result_1.default(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager --sdk_root=${this.androidHome()} --update"`);
@@ -94,7 +97,7 @@ class BaseAndroidSdk {
     verifyHardwareAcceleration() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                let exitCode = yield exec_1.exec(`${this.androidHome()}/tools/emulator -accel-check`);
+                let exitCode = yield exec_1.exec(`${this.emulatorCmd()} -accel-check`);
                 return exitCode == 0;
             }
             catch (e) {
@@ -104,7 +107,7 @@ class BaseAndroidSdk {
     }
     listEmulators() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield exec_with_result_1.default(`${this.androidHome()}/tools/emulator -list-avds`);
+            yield exec_with_result_1.default(`${this.emulatorCmd()} -list-avds`);
         });
     }
     listRunningEmulators() {
