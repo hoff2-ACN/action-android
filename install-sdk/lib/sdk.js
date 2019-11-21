@@ -64,7 +64,6 @@ class BaseAndroidSdk {
     acceptLicense() {
         return __awaiter(this, void 0, void 0, function* () {
             const cmd = `bash -c \\\"yes | ${this.androidHome()}/tools/bin/sdkmanager --licenses"`;
-            console.log(cmd);
             yield exec_with_result_1.default(cmd);
         });
     }

@@ -17,6 +17,8 @@ export interface AndroidSDK {
 
     androidHome(): string
 
+    emulatorCmd(): string
+
     acceptLicense(): Promise<any>
 
     installEmulatorPackage(api: string, tag: string, abi: string, verbose: boolean): Promise<any>
@@ -75,9 +77,12 @@ export abstract class BaseAndroidSdk implements AndroidSDK {
         return `${process.env.HOME}/android-sdk`
     }
 
+    emulatorCmd(): string {
+        return `${this.androidHome()}/emulator/emulator`
+    }
+
     async acceptLicense(): Promise<any> {
         const cmd = `bash -c \\\"yes | ${this.androidHome()}/tools/bin/sdkmanager --licenses"`;
-        console.log(cmd);
         await execWithResult(cmd);
     }
 
@@ -106,7 +111,7 @@ export abstract class BaseAndroidSdk implements AndroidSDK {
 
     async verifyHardwareAcceleration(): Promise<boolean> {
         try {
-            let exitCode = await exec(`${this.androidHome()}/tools/emulator -accel-check`);
+            let exitCode = await exec(`${this.emulatorCmd()} -accel-check`);
             return exitCode == 0
         } catch (e) {
             return false
@@ -114,7 +119,7 @@ export abstract class BaseAndroidSdk implements AndroidSDK {
     }
 
     async listEmulators(): Promise<any> {
-        await execWithResult(`${this.androidHome()}/tools/emulator -list-avds`)
+        await execWithResult(`${this.emulatorCmd()} -list-avds`)
     }
 
     async listRunningEmulators(): Promise<Array<Emulator>> {
