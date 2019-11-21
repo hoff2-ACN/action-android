@@ -25,6 +25,7 @@ class Emulator {
     }
     start() {
         return __awaiter(this, void 0, void 0, function* () {
+            yield exec_with_result_1.default(`bash -c \\\"${this.sdk.androidHome()}/tools/bin/sdkmanager --update"`);
             yield exec_with_result_1.default(`bash -c \\\"${this.sdk.emulatorCmd()} @${this.name} -no-snapshot-save &\"`);
             let booted = yield this.waitForBoot();
             console.log(`booted=${booted}`);
