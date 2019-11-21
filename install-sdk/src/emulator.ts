@@ -27,7 +27,6 @@ export class Emulator {
     }
 
     async start(): Promise<any> {
-        await execWithResult(`bash -c \\\"${this.sdk.androidHome()}/tools/bin/sdkmanager --update"`);
         await execWithResult(`bash -c \\\"${this.sdk.emulatorCmd()} @${this.name} -no-snapshot-save &\"`)
         let booted = await this.waitForBoot();
         console.log(`booted=${booted}`)

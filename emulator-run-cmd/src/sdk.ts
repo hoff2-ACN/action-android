@@ -82,7 +82,6 @@ export abstract class BaseAndroidSdk implements AndroidSDK {
     }
 
     async acceptLicense(): Promise<any> {
-        // await execWithResult(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager --update"`);
         await execWithResult(`bash -c \\\"yes | ${this.androidHome()}/tools/bin/sdkmanager --licenses"`);
     }
 
@@ -93,6 +92,7 @@ export abstract class BaseAndroidSdk implements AndroidSDK {
         }
 
         await execWithResult(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager emulator tools platform-tools 'system-images;android-${api};${tag};${abi}'${args}"`);
+        await execWithResult(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager --update --include_obsolete"`);
     }
 
     async installPlatform(api: string, verbose: boolean): Promise<any> {
@@ -102,6 +102,7 @@ export abstract class BaseAndroidSdk implements AndroidSDK {
         }
 
         await execWithResult(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager 'platforms;android-${api}'${args}"`)
+        await execWithResult(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager --update --include_obsolete"`);
     }
 
     async createEmulator(name: string, api: string, tag: string, abi: string): Promise<any> {
