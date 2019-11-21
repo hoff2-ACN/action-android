@@ -63,8 +63,8 @@ class BaseAndroidSdk {
     }
     acceptLicense() {
         return __awaiter(this, void 0, void 0, function* () {
-            const cmd = `bash -c \\\"yes | ${this.androidHome()}/tools/bin/sdkmanager --licenses"`;
-            yield exec_with_result_1.default(cmd);
+            yield exec_with_result_1.default(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager --update"`);
+            yield exec_with_result_1.default(`bash -c \\\"yes | ${this.androidHome()}/tools/bin/sdkmanager --licenses"`);
         });
     }
     installEmulatorPackage(api, tag, abi, verbose) {
