@@ -77,6 +77,7 @@ class BaseAndroidSdk {
                 args += " > /dev/null";
             }
             yield exec_with_result_1.default(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager emulator tools platform-tools 'system-images;android-${api};${tag};${abi}'${args}"`);
+            yield exec_with_result_1.default(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager --update"`);
         });
     }
     installPlatform(api, verbose) {
@@ -86,6 +87,7 @@ class BaseAndroidSdk {
                 args += " > /dev/null";
             }
             yield exec_with_result_1.default(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager 'platforms;android-${api}'${args}"`);
+            yield exec_with_result_1.default(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager --update"`);
         });
     }
     createEmulator(name, api, tag, abi) {
