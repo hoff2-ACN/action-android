@@ -76,7 +76,7 @@ export abstract class BaseAndroidSdk implements AndroidSDK {
     }
 
     async acceptLicense(): Promise<any> {
-        await execWithResult(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager --update"`);
+        await execWithResult(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager --sdk_root=${this.androidHome()} --update"`);
         await execWithResult(`bash -c \\\"yes | ${this.androidHome()}/tools/bin/sdkmanager --licenses"`);
     }
 
