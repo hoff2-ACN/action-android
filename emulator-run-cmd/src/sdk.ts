@@ -76,7 +76,9 @@ export abstract class BaseAndroidSdk implements AndroidSDK {
     }
 
     async acceptLicense(): Promise<any> {
-        await execWithResult(`bash -c \\\"echo 'y\ny\ny\ny\ny\ny\ny\ny\ny\n' | ${this.androidHome()}/tools/bin/sdkmanager --licenses"`);
+        const cmd = `bash -c \\\"yes | ${this.androidHome()}/tools/bin/sdkmanager --licenses"`;
+        console.log(cmd);
+        await execWithResult(cmd);
     }
 
     async installEmulatorPackage(api: string, tag: string, abi: string, verbose: boolean): Promise<any> {
