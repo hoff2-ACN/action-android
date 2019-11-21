@@ -63,15 +63,9 @@ class BaseAndroidSdk {
     }
     acceptLicense() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield exec_with_result_1.default(`mkdir -p ${this.androidHome()}/licenses`);
-            yield writeLicenseFile(`${this.androidHome()}/licenses/android-sdk-license`, "8933bad161af4178b1185d1a37fbf41ea5269c55\n" +
-                "d56f5187479451eabf01fb78af6dfcb131a6481e\n" +
-                "24333f8a63b6825ea9c5514f83c2829b004d1fee");
-            yield writeLicenseFile(`${this.androidHome()}/licenses/android-sdk-preview-license`, "84831b9409646a918e30573bab4c9c91346d8abd\n");
-            yield writeLicenseFile(`${this.androidHome()}/licenses/intel-android-extra-license`, "d975f751698a77b662f1254ddbeed3901e976f5a\n");
-            yield writeLicenseFile(`${this.androidHome()}/licenses/mips-android-sysimage-license`, "e9acab5b5fbb560a72cfaecce8946896ff6aab9d\n");
-            yield writeLicenseFile(`${this.androidHome()}/licenses/google-gdk-license`, "33b6a2b64607f11b759f320ef9dff4ae5c47d97a\n");
-            yield writeLicenseFile(`${this.androidHome()}/licenses/android-googletv-license`, "601085b94cd77f0b54ff86406957099ebe79c4d6\n");
+            const cmd = `bash -c \\\"yes | ${this.androidHome()}/tools/bin/sdkmanager --licenses"`;
+            console.log(cmd);
+            yield exec_with_result_1.default(cmd);
         });
     }
     installEmulatorPackage(api, tag, abi, verbose) {
