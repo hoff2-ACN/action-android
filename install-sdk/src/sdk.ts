@@ -82,7 +82,6 @@ export abstract class BaseAndroidSdk implements AndroidSDK {
     }
 
     async acceptLicense(): Promise<any> {
-        await execWithResult(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager --sdk_root=${this.androidHome()} --update"`);
         await execWithResult(`bash -c \\\"yes | ${this.androidHome()}/tools/bin/sdkmanager --licenses"`);
     }
 
@@ -93,6 +92,7 @@ export abstract class BaseAndroidSdk implements AndroidSDK {
         }
 
         await execWithResult(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager emulator tools platform-tools 'system-images;android-${api};${tag};${abi}'${args}"`);
+        await execWithResult(`bash -c \\\"${this.androidHome()}/tools/bin/sdkmanager --update"`);
     }
 
     async installPlatform(api: string, verbose: boolean): Promise<any> {
